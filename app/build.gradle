@@ -59,4 +59,18 @@ dependencies {
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
+
+    //Exoplayer to make this app able to playing videos
+    implementation "com.google.android.exoplayer:exoplayer:2.18.0"
+
+    //Coil to able loading image from URL
+    implementation("io.coil-kt:coil-compose:2.1.0")
+
+    //Koin for easier dependencies injections
+    def koin_version= "3.2.0"
+    implementation "io.insert-koin:koin-core:$koin_version"
+    implementation "io.insert-koin:koin-androidx-compose:$koin_version"
+
+    //Navigation Accompanist
+    implementation "com.google.accompanist:accompanist-navigation-animation:0.23.1"
 }
