@@ -30,6 +30,7 @@ fun TextInputField(
     trailingContent: @Composable (() -> Unit)? = null,
     shape: Shape = RoundedCornerShape(CornerSize(32.dp)),
     colors: TextFieldColors = TextFieldDefaults.outlinedTextFieldColors(
+        cursorColor = Dark,
         placeholderColor = Color.Gray,
         textColor = Dark,
         backgroundColor = Light,

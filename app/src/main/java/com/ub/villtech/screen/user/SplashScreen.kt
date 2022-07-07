@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -15,11 +16,15 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.ub.villtech.R
+import com.ub.villtech.navigation.NavigationRoute
 import com.ub.villtech.ui.theme.GreenMint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @Composable
-fun SplashScreen() {
+fun SplashScreen(navController: NavController) {
     val iconHeight = (LocalConfiguration.current.screenHeightDp) / 4
 
     Box(
@@ -47,5 +52,13 @@ fun SplashScreen() {
                 )
             )
         }
+    }
+
+    rememberCoroutineScope().launch {
+        delay(2500)
+            .also {
+                navController.popBackStack()
+                navController.navigate(route = NavigationRoute.OnboardScreen.name)
+            }
     }
 }

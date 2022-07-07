@@ -18,19 +18,22 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.ub.villtech.R
 import com.ub.villtech.component.GreenButton
 import com.ub.villtech.component.TextInputField
 import com.ub.villtech.component.TextPasswordField
+import com.ub.villtech.navigation.NavigationRoute
 import com.ub.villtech.ui.theme.BlueDark
 import com.ub.villtech.ui.theme.Dark
 import com.ub.villtech.ui.theme.Typography
 import com.ub.villtech.viewmodel.AdminLoginViewModel
+import com.ub.villtech.viewmodel.RootViewModel
 import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun AdminLoginScreen() {
+fun AdminLoginScreen(navController: NavController) {
     val adminLoginViewModel = getViewModel<AdminLoginViewModel>()
 
     Column(
@@ -39,9 +42,9 @@ fun AdminLoginScreen() {
     ) {
         TopBanner()
 
-        Column(modifier = Modifier.fillMaxSize(),verticalArrangement = Arrangement.SpaceEvenly) {
+        Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.SpaceEvenly) {
             TextFieldSection(viewModel = adminLoginViewModel)
-            ButtonSection(viewModel = adminLoginViewModel)
+            ButtonSection(navController = navController, viewModel = adminLoginViewModel)
         }
     }
 }
@@ -126,7 +129,9 @@ private fun TextFieldSection(viewModel: AdminLoginViewModel) {
 }
 
 @Composable
-private fun ButtonSection(viewModel: AdminLoginViewModel) {
+private fun ButtonSection(navController: NavController, viewModel: AdminLoginViewModel) {
+    val rootViewModel = getViewModel<RootViewModel>()
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -134,7 +139,18 @@ private fun ButtonSection(viewModel: AdminLoginViewModel) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         GreenButton(
-            onClick = { /**RUN LOGIN COROUTINE THROUGH VIEWMODEL*/ },
+            onClick = {
+                viewModel.loginWithEmailPassword(
+                    viewModel.emailState.value,
+                    viewModel.passwordState.value,
+                    onSuccess = {
+                        rootViewModel.showSnackbar("Berhasil!!\nAnda masuk dengan email ${it.email}")
+                    },
+                    onFailed = {
+                        rootViewModel.showSnackbar("Gagal!!\nCoba lagi nanti")
+                    }
+                )
+            },
             text = "Masuk sebagai Admin"
         )
         Spacer(modifier = Modifier.height(8.dp))
@@ -142,7 +158,9 @@ private fun ButtonSection(viewModel: AdminLoginViewModel) {
             Text(text = "Masuk sebagai ", color = BlueDark, style = Typography.body2)
             Text(
                 modifier = Modifier.clickable(
-                    onClick = { /**GO TO ONBOARD LOGIN PAGE*/ },
+                    onClick = {
+                        navController.popBackStack(route = NavigationRoute.AdminLoginScreen.name, inclusive = true)
+                    },
                     interactionSource = remember { MutableInteractionSource() },
                     indication = rememberRipple(bounded = true, color = Color.Black)
                 ),

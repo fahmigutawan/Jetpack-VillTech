@@ -5,9 +5,10 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
-import com.ub.villtech.component.BottomNavigationSelection
 import com.ub.villtech.screen.admin.AdminLoginScreen
+import com.ub.villtech.screen.user.HomeScreen
 import com.ub.villtech.screen.user.OnboardScreen
+import com.ub.villtech.screen.user.SearchScreen
 import com.ub.villtech.screen.user.SplashScreen
 import com.ub.villtech.viewmodel.BottomNavigationViewModel
 import com.ub.villtech.viewmodel.RootViewModel
@@ -19,22 +20,33 @@ fun RootNavigation(navController: NavHostController) {
     val rootViewModel = getViewModel<RootViewModel>()
     val bottomNavigationViewModel = getViewModel<BottomNavigationViewModel>()
 
-    AnimatedNavHost(navController = navController, startDestination = BottomNavigationSelection.Home.name){
-        composable(route = BottomNavigationSelection.Home.name){
-            rootViewModel.isBottomNavigationEnabled = true
-            bottomNavigationViewModel.selectState = BottomNavigationSelection.Home
+    AnimatedNavHost(navController = navController, startDestination = NavigationRoute.SplashScreen.name){
+        composable(route = NavigationRoute.SplashScreen.name){
+            SplashScreen(navController = navController)
         }
-        composable(route = BottomNavigationSelection.Search.name){
-            rootViewModel.isBottomNavigationEnabled = true
-            bottomNavigationViewModel.selectState = BottomNavigationSelection.Home
+        composable(route = NavigationRoute.OnboardScreen.name){
+            OnboardScreen(navController = navController)
         }
-        composable(route = BottomNavigationSelection.Favorite.name){
-            rootViewModel.isBottomNavigationEnabled = true
-            bottomNavigationViewModel.selectState = BottomNavigationSelection.Home
+        composable(route = NavigationRoute.AdminLoginScreen.name){
+            AdminLoginScreen(navController = navController)
         }
-        composable(route = BottomNavigationSelection.About.name){
+        composable(route = NavigationRoute.HomeScreen.name){
             rootViewModel.isBottomNavigationEnabled = true
-            bottomNavigationViewModel.selectState = BottomNavigationSelection.Home
+            HomeScreen(navController = navController)
+            bottomNavigationViewModel.selectState = NavigationRoute.HomeScreen
+        }
+        composable(route = NavigationRoute.SearchScreen.name){
+            rootViewModel.isBottomNavigationEnabled = true
+            SearchScreen(navController = navController)
+            bottomNavigationViewModel.selectState = NavigationRoute.SearchScreen
+        }
+        composable(route = NavigationRoute.FavoriteScreen.name){
+            rootViewModel.isBottomNavigationEnabled = true
+            bottomNavigationViewModel.selectState = NavigationRoute.FavoriteScreen
+        }
+        composable(route = NavigationRoute.AboutScreen.name){
+            rootViewModel.isBottomNavigationEnabled = true
+            bottomNavigationViewModel.selectState = NavigationRoute.AboutScreen
         }
     }
 }

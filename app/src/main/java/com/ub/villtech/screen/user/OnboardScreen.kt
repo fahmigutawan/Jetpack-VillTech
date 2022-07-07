@@ -19,16 +19,18 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.ub.villtech.R
 import com.ub.villtech.component.GreenButton
+import com.ub.villtech.navigation.NavigationRoute
 import com.ub.villtech.ui.theme.BlueDark
 import com.ub.villtech.ui.theme.Typography
 import com.ub.villtech.viewmodel.RootViewModel
 import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun OnboardScreen() {
+fun OnboardScreen(navController: NavController) {
     val bannerHeight = (LocalConfiguration.current.screenHeightDp) / 3
 
     Column(modifier = Modifier.fillMaxSize()) {
@@ -75,7 +77,12 @@ fun OnboardScreen() {
                     .padding(bottom = 16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                GreenButton(onClick = { /**GO TO HOME*/ }, text = "Masuk sebagai Pengunjung")
+                GreenButton(
+                    onClick = {
+                        navController.popBackStack()
+                        navController.navigate(route = NavigationRoute.HomeScreen.name)
+                    }, text = "Masuk sebagai Pengunjung"
+                )
 
                 Spacer(modifier = Modifier.height(8.dp))
 
@@ -83,7 +90,9 @@ fun OnboardScreen() {
                     Text(text = "Masuk sebagai ", color = BlueDark, style = Typography.body2)
                     Text(
                         modifier = Modifier.clickable(
-                            onClick = { /**GO TO ADMIN LOGIN PAGE*/ },
+                            onClick = {
+                                navController.navigate(route = NavigationRoute.AdminLoginScreen.name)
+                            },
                             interactionSource = remember { MutableInteractionSource() },
                             indication = rememberRipple(bounded = true, color = Color.Black)
                         ),

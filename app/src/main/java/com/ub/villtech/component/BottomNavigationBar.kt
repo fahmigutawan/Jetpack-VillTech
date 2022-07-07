@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.ub.villtech.R
+import com.ub.villtech.navigation.NavigationRoute
 import com.ub.villtech.ui.theme.*
 import com.ub.villtech.viewmodel.BottomNavigationViewModel
 import com.ub.villtech.viewmodel.RootViewModel
@@ -48,44 +49,44 @@ fun BottomNavigationBar(navController: NavHostController) {
             NavbarItem(
                 iconId = listOfIconId[0].value,
                 name = "Beranda",
-                enumSelection = BottomNavigationSelection.Home,
+                enumSelection = NavigationRoute.HomeScreen,
                 onClick = {
-                    if (viewModel.selectState != BottomNavigationSelection.Home) {
+                    if (viewModel.selectState != NavigationRoute.HomeScreen) {
                         navController.popBackStack()
-                        navController.navigate(BottomNavigationSelection.Home.name)
+                        navController.navigate(NavigationRoute.HomeScreen.name)
                     }
                 }
             ),
             NavbarItem(
                 iconId = listOfIconId[1].value,
                 name = "Jelajah",
-                enumSelection = BottomNavigationSelection.Search,
+                enumSelection = NavigationRoute.SearchScreen,
                 onClick = {
-                    if (viewModel.selectState != BottomNavigationSelection.Search) {
+                    if (viewModel.selectState != NavigationRoute.SearchScreen) {
                         navController.popBackStack()
-                        navController.navigate(BottomNavigationSelection.Search.name)
+                        navController.navigate(NavigationRoute.SearchScreen.name)
                     }
                 }
             ),
             NavbarItem(
                 iconId = listOfIconId[2].value,
                 name = "Favorit",
-                enumSelection = BottomNavigationSelection.Favorite,
+                enumSelection = NavigationRoute.FavoriteScreen,
                 onClick = {
-                    if (viewModel.selectState != BottomNavigationSelection.Favorite) {
+                    if (viewModel.selectState != NavigationRoute.FavoriteScreen) {
                         navController.popBackStack()
-                        navController.navigate(BottomNavigationSelection.Favorite.name)
+                        navController.navigate(NavigationRoute.FavoriteScreen.name)
                     }
                 }
             ),
             NavbarItem(
                 iconId = listOfIconId[3].value,
                 name = "Tentang",
-                enumSelection = BottomNavigationSelection.About,
+                enumSelection = NavigationRoute.AboutScreen,
                 onClick = {
-                    if (viewModel.selectState != BottomNavigationSelection.About) {
+                    if (viewModel.selectState != NavigationRoute.AboutScreen) {
                         navController.popBackStack()
-                        navController.navigate(BottomNavigationSelection.About.name)
+                        navController.navigate(NavigationRoute.AboutScreen.name)
                     }
                 }
             )
@@ -186,7 +187,7 @@ private fun runBottomNavigationListener(
     listOfVisibleState: ArrayList<MutableState<Boolean>>,
     listOfNavbarItem: List<NavbarItem>
 ) {
-    if (viewModel.selectState == BottomNavigationSelection.Home) {
+    if (viewModel.selectState == NavigationRoute.HomeScreen) {
         listOfIconId[0].value = R.drawable.ic_botnavbar_home_click
         listOfVisibleState[0].value = true
     } else {
@@ -194,7 +195,7 @@ private fun runBottomNavigationListener(
         listOfVisibleState[0].value = false
     }
 
-    if (viewModel.selectState == BottomNavigationSelection.Search) {
+    if (viewModel.selectState == NavigationRoute.SearchScreen) {
         listOfIconId[1].value = R.drawable.ic_botnavbar_search_click
         listOfVisibleState[1].value = true
     } else {
@@ -202,7 +203,7 @@ private fun runBottomNavigationListener(
         listOfVisibleState[1].value = false
     }
 
-    if (viewModel.selectState == BottomNavigationSelection.Favorite) {
+    if (viewModel.selectState == NavigationRoute.FavoriteScreen) {
         listOfIconId[2].value = R.drawable.ic_botnavbar_favorite_click
         listOfVisibleState[2].value = true
     } else {
@@ -210,7 +211,7 @@ private fun runBottomNavigationListener(
         listOfVisibleState[2].value = false
     }
 
-    if (viewModel.selectState == BottomNavigationSelection.About) {
+    if (viewModel.selectState == NavigationRoute.AboutScreen) {
         listOfIconId[3].value = R.drawable.ic_botnavbar_about_click
         listOfVisibleState[3].value = true
     } else {
@@ -222,10 +223,6 @@ private fun runBottomNavigationListener(
 private data class NavbarItem(
     val iconId: Int,
     val name: String,
-    val enumSelection: BottomNavigationSelection,
+    val enumSelection: NavigationRoute,
     val onClick: () -> Unit
 )
-
-enum class BottomNavigationSelection {
-    Home, Search, Favorite, About
-}

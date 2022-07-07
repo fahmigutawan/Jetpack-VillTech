@@ -6,15 +6,10 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.ub.villtech.component.BottomNavigationBar
 import com.ub.villtech.component.GreenSnackbar
 import com.ub.villtech.navigation.RootNavigation
-import com.ub.villtech.screen.admin.AdminLoginScreen
-import com.ub.villtech.screen.user.OnboardScreen
-import com.ub.villtech.viewmodel.RootViewModel
-import org.koin.androidx.compose.getViewModel
 
 lateinit var scaffoldState: ScaffoldState
 
