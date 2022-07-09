@@ -7,5 +7,5 @@ import androidx.lifecycle.ViewModel
 import com.ub.villtech.navigation.NavigationRoute
 
 class BottomNavigationViewModel : ViewModel() {
-    var selectState by mutableStateOf(NavigationRoute.HomeScreen)
+    var selectState by mutableStateOf(NavigationRoute.SplashScreen)
 }

@@ -1,11 +1,15 @@
 package com.ub.villtech.component
 
+import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlin.math.ceil
 
 @Composable
@@ -112,7 +116,7 @@ private fun shortestColumn(colHeights: IntArray): Int {
     return column
 }
 
-class StaggeredGridScope {
+class StaggeredGridScope() {
     private val _data = mutableListOf<@Composable () -> Unit>()
     val content get() = _data.toList()
 

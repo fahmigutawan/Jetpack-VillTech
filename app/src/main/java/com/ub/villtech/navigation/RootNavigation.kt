@@ -5,11 +5,11 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
-import com.ub.villtech.screen.admin.AdminLoginScreen
-import com.ub.villtech.screen.user.HomeScreen
-import com.ub.villtech.screen.user.OnboardScreen
-import com.ub.villtech.screen.user.SearchScreen
-import com.ub.villtech.screen.user.SplashScreen
+import com.ub.villtech.screen.SearchScreen
+import com.ub.villtech.screen.LoginScreen
+import com.ub.villtech.screen.HomeScreen
+import com.ub.villtech.screen.OnboardScreen
+import com.ub.villtech.screen.SplashScreen
 import com.ub.villtech.viewmodel.BottomNavigationViewModel
 import com.ub.villtech.viewmodel.RootViewModel
 import org.koin.androidx.compose.getViewModel
@@ -28,7 +28,7 @@ fun RootNavigation(navController: NavHostController) {
             OnboardScreen(navController = navController)
         }
         composable(route = NavigationRoute.AdminLoginScreen.name){
-            AdminLoginScreen(navController = navController)
+            LoginScreen(navController = navController)
         }
         composable(route = NavigationRoute.HomeScreen.name){
             rootViewModel.isBottomNavigationEnabled = true

@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.ub.villtech.repository.firebase.FirebaseRepository
-import com.ub.villtech.screen.user.SearchScreenTopMenuSelection
+import com.ub.villtech.screen.SearchScreenTopMenuSelection
 
 class SearchViewModel(firebaseRepository: FirebaseRepository) : ViewModel() {
     var topMenuSelected by mutableStateOf(SearchScreenTopMenuSelection.All)

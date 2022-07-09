@@ -1,6 +1,5 @@
-package com.ub.villtech.screen.user
+package com.ub.villtech.screen
 
-import android.widget.Space
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
@@ -16,21 +15,22 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import com.google.firebase.auth.FirebaseAuth
 import com.ub.villtech.R
 import com.ub.villtech.component.GreenButton
 import com.ub.villtech.navigation.NavigationRoute
+import com.ub.villtech.rootViewModel
 import com.ub.villtech.ui.theme.BlueDark
 import com.ub.villtech.ui.theme.Typography
-import com.ub.villtech.viewmodel.RootViewModel
-import org.koin.androidx.compose.getViewModel
+import org.koin.androidx.compose.get
 
 @Composable
 fun OnboardScreen(navController: NavController) {
+    val authInstance = get<FirebaseAuth>()
     val bannerHeight = (LocalConfiguration.current.screenHeightDp) / 3
 
     Column(modifier = Modifier.fillMaxSize()) {
@@ -91,7 +91,13 @@ fun OnboardScreen(navController: NavController) {
                     Text(
                         modifier = Modifier.clickable(
                             onClick = {
-                                navController.navigate(route = NavigationRoute.AdminLoginScreen.name)
+                                if(authInstance.currentUser!=null){
+                                    rootViewModel.isLoginWithAdmin = true
+                                    navController.popBackStack()
+                                    navController.navigate(route = NavigationRoute.HomeScreen.name)
+                                }else{
+                                    navController.navigate(route = NavigationRoute.AdminLoginScreen.name)
+                                }
                             },
                             interactionSource = remember { MutableInteractionSource() },
                             indication = rememberRipple(bounded = true, color = Color.Black)

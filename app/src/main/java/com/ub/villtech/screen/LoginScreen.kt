@@ -1,4 +1,4 @@
-package com.ub.villtech.screen.admin
+package com.ub.villtech.screen
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import com.google.firebase.auth.FirebaseAuth
 import com.ub.villtech.R
 import com.ub.villtech.component.GreenButton
 import com.ub.villtech.component.TextInputField
@@ -30,11 +31,13 @@ import com.ub.villtech.ui.theme.Dark
 import com.ub.villtech.ui.theme.Typography
 import com.ub.villtech.viewmodel.AdminLoginViewModel
 import com.ub.villtech.viewmodel.RootViewModel
+import org.koin.androidx.compose.get
 import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun AdminLoginScreen(navController: NavController) {
+fun LoginScreen(navController: NavController) {
     val adminLoginViewModel = getViewModel<AdminLoginViewModel>()
+    val authInstance = get<FirebaseAuth>()
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -48,6 +51,7 @@ fun AdminLoginScreen(navController: NavController) {
         }
     }
 }
+
 
 @Composable
 private fun TopBanner() {
@@ -144,10 +148,12 @@ private fun ButtonSection(navController: NavController, viewModel: AdminLoginVie
                     viewModel.emailState.value,
                     viewModel.passwordState.value,
                     onSuccess = {
-                        rootViewModel.showSnackbar("Berhasil!!\nAnda masuk dengan email ${it.email}")
+                        rootViewModel.isLoginWithAdmin = true
+                        navController.navigate(route = NavigationRoute.HomeScreen.name)
+                        rootViewModel.showSnackbar("Berhasil")
                     },
                     onFailed = {
-                        rootViewModel.showSnackbar("Gagal!!\nCoba lagi nanti")
+                        rootViewModel.showSnackbar("Gagal\nCoba lagi nanti")
                     }
                 )
             },
@@ -159,7 +165,10 @@ private fun ButtonSection(navController: NavController, viewModel: AdminLoginVie
             Text(
                 modifier = Modifier.clickable(
                     onClick = {
-                        navController.popBackStack(route = NavigationRoute.AdminLoginScreen.name, inclusive = true)
+                        navController.popBackStack(
+                            route = NavigationRoute.AdminLoginScreen.name,
+                            inclusive = true
+                        )
                     },
                     interactionSource = remember { MutableInteractionSource() },
                     indication = rememberRipple(bounded = true, color = Color.Black)

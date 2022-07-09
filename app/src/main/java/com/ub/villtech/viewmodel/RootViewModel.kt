@@ -12,6 +12,8 @@ import kotlinx.coroutines.launch
 
 class RootViewModel:ViewModel() {
     var isBottomNavigationEnabled by mutableStateOf(false)
+    var isLoginWithAdmin by mutableStateOf(false)
+    var contentHeight by mutableStateOf(0)
     fun showSnackbar(message:String){
         viewModelScope.launch {
             scaffoldState.snackbarHostState.currentSnackbarData?.dismiss()

@@ -1,5 +1,4 @@
-package com.ub.villtech.screen.user
-
+package com.ub.villtech.screen
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon

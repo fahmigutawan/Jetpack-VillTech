@@ -1,4 +1,4 @@
-package com.ub.villtech.screen.user
+package com.ub.villtech.screen
 
 import androidx.compose.animation.*
 import androidx.compose.animation.core.tween

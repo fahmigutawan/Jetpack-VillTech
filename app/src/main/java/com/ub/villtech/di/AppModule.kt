@@ -21,5 +21,7 @@ object AppModule {
         viewModel { RootViewModel() }
         viewModel { AdminLoginViewModel(get()) }
         viewModel { SearchViewModel(get()) }
+        viewModel { UserHomeViewModel(get()) }
+        viewModel { AdminHomeViewModel(get()) }
     }
 }
