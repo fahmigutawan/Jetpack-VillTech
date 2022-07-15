@@ -1,5 +1,6 @@
 package com.ub.villtech.screen
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
@@ -29,6 +30,7 @@ import com.ub.villtech.navigation.NavigationRoute
 import com.ub.villtech.ui.theme.BlueDark
 import com.ub.villtech.ui.theme.Dark
 import com.ub.villtech.ui.theme.Typography
+import com.ub.villtech.utils.LoginChecker
 import com.ub.villtech.viewmodel.AdminLoginViewModel
 import com.ub.villtech.viewmodel.RootViewModel
 import org.koin.androidx.compose.get
@@ -51,7 +53,6 @@ fun LoginScreen(navController: NavController) {
         }
     }
 }
-
 
 @Composable
 private fun TopBanner() {
@@ -135,6 +136,7 @@ private fun TextFieldSection(viewModel: AdminLoginViewModel) {
 @Composable
 private fun ButtonSection(navController: NavController, viewModel: AdminLoginViewModel) {
     val rootViewModel = getViewModel<RootViewModel>()
+    val loginChecker = get<LoginChecker>()
 
     Column(
         modifier = Modifier
@@ -148,7 +150,8 @@ private fun ButtonSection(navController: NavController, viewModel: AdminLoginVie
                     viewModel.emailState.value,
                     viewModel.passwordState.value,
                     onSuccess = {
-                        rootViewModel.isLoginWithAdmin = true
+                        loginChecker.isLoginWithAdmin = true
+                        loginChecker.loadAdminInfo()
                         navController.navigate(route = NavigationRoute.HomeScreen.name)
                         rootViewModel.showSnackbar("Berhasil")
                     },

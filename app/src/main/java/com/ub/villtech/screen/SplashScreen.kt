@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.ub.villtech.R
 import com.ub.villtech.navigation.NavigationRoute
+import com.ub.villtech.rootViewModel
 import com.ub.villtech.ui.theme.GreenMint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

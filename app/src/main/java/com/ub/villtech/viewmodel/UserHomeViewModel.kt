@@ -19,17 +19,18 @@ class UserHomeViewModel(
     val contentList = mutableStateListOf<ContentItem>()
     var contentCount by mutableStateOf(-1)
     var lastLoadedId by mutableStateOf(-1)
+    var isLoaded by mutableStateOf(false)
     fun getContentList(count: Int, onLoading: () -> Unit, onSuccess: () -> Unit) {
         onLoading()
+        isLoaded = false
         viewModelScope.launch {
             firebaseRepository
                 .getContentList()
                 .addOnSuccessListener {
-                    onSuccess()
-                    contentCount = (it.child("count").value as Long).toInt()
+                    contentCount = (it.child("count").value.toString()).toInt()
 
                     if (lastLoadedId == (-1)) {
-                        lastLoadedId = (it.child("count").value as Long).toInt()
+                        lastLoadedId = (it.child("count").value.toString()).toInt()
                     }
 
                     if (contentCount != contentList.size) {
@@ -44,20 +45,19 @@ class UserHomeViewModel(
                                 it
                                     .child("comment_list")
                                     .children
-                                    .forEach {
-                                        commentList.add(ContentComment(comment = it.value.toString()))
-                                    }
+                                    .forEach { commentList.add(ContentComment(comment = it.value.toString())) }
 
                                 contentList.add(
                                     ContentItem(
+                                        content_id = res.child("content_id").value.toString(),
                                         title = res.child("title").value.toString(),
                                         author = res.child("author").value.toString(),
                                         category = res.child("category").value.toString(),
                                         media_url = res.child("media_url").value.toString(),
-                                        thumbnail_url = res.child("thumbnail_url").value.toString(),
+                                        thumbnail_url = res.child("thumbnail").value.toString(),
                                         post_date = res.child("post_date").value.toString(),
                                         description = res.child("description").value.toString(),
-                                        commentCount = res.child("comment_count").value.toString(),
+                                        commentCount = res.child("commentCount").value.toString(),
                                         commentList = commentList
                                     )
                                 )
@@ -69,6 +69,7 @@ class UserHomeViewModel(
                                 break
                             }
                     }
+                    onSuccess()
                 }
                 .addOnFailureListener {
                     rootViewModel.showSnackbar("Gagal memuat, coba lagi nanti!")

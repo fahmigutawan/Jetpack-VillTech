@@ -26,12 +26,16 @@ import com.ub.villtech.navigation.NavigationRoute
 import com.ub.villtech.rootViewModel
 import com.ub.villtech.ui.theme.BlueDark
 import com.ub.villtech.ui.theme.Typography
+import com.ub.villtech.utils.LoginChecker
+import com.ub.villtech.viewmodel.BottomNavigationViewModel
 import org.koin.androidx.compose.get
+import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun OnboardScreen(navController: NavController) {
     val authInstance = get<FirebaseAuth>()
     val bannerHeight = (LocalConfiguration.current.screenHeightDp) / 3
+    val loginChecker = get<LoginChecker>()
 
     Column(modifier = Modifier.fillMaxSize()) {
         /**Banner*/
@@ -92,7 +96,8 @@ fun OnboardScreen(navController: NavController) {
                         modifier = Modifier.clickable(
                             onClick = {
                                 if(authInstance.currentUser!=null){
-                                    rootViewModel.isLoginWithAdmin = true
+                                    loginChecker.isLoginWithAdmin = true
+                                    loginChecker.loadAdminInfo()
                                     navController.popBackStack()
                                     navController.navigate(route = NavigationRoute.HomeScreen.name)
                                 }else{

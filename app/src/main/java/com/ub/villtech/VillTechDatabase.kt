@@ -11,22 +11,22 @@ import com.ub.villtech.room.BookmarkedEntity
 abstract class VillTechDatabase:RoomDatabase() {
     abstract fun iRoomRepository(): IRoomRepository
 
-    companion object {
-        private var INSTANCE: VillTechDatabase? = null
-
-        fun getInstance(context: Context): VillTechDatabase {
-            synchronized(this) {
-                var instance = INSTANCE
-
-                if (instance == null) {
-                    instance = Room.databaseBuilder(
-                        context.applicationContext,
-                        VillTechDatabase::class.java, "bookmarked_content"
-                    ).fallbackToDestructiveMigration().build()
-                }
-
-                return instance
-            }
-        }
-    }
+//    companion object {
+//        private var INSTANCE: VillTechDatabase? = null
+//
+//        fun getInstance(context: Context): VillTechDatabase {
+//            synchronized(this) {
+//                var instance = INSTANCE
+//
+//                if (instance == null) {
+//                    instance = Room.databaseBuilder(
+//                        context.applicationContext,
+//                        VillTechDatabase::class.java, "bookmarked_content"
+//                    ).fallbackToDestructiveMigration().build()
+//                }
+//
+//                return instance
+//            }
+//        }
+//    }
 }

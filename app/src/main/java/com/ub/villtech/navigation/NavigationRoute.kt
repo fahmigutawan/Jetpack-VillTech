@@ -7,5 +7,6 @@ enum class NavigationRoute {
     HomeScreen,
     SearchScreen,
     FavoriteScreen,
-    AboutScreen
+    AboutScreen,
+    DetailPostScreen
 }

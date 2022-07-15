@@ -12,27 +12,33 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.ButtonElevation
 import androidx.compose.material.Text
 import androidx.compose.material.ripple.rememberRipple
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.ub.villtech.ui.theme.GreenLight
 import com.ub.villtech.ui.theme.GreenMint
 import com.ub.villtech.ui.theme.Typography
 
 @Composable
 fun GreenButton(
     onClick: () -> Unit,
-    text: String
+    text: String,
+    enabled:Boolean = true
 ) {
+    var btnColor by remember { mutableStateOf(GreenMint) }
+    if(enabled) btnColor = GreenMint
+    else btnColor = Color.DarkGray
+
     Box(
         modifier = Modifier
             .clip(RoundedCornerShape(CornerSize(14.dp)))
-            .background(color = GreenMint)
+            .background(color = btnColor)
             .clickable(
+                enabled = enabled,
                 onClick = onClick,
                 interactionSource = remember { MutableInteractionSource() },
                 indication = rememberRipple(bounded = true, color = Color.Black)

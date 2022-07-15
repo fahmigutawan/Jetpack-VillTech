@@ -10,6 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.ub.villtech.component.BottomNavigationBar
 import com.ub.villtech.component.GreenSnackbar
@@ -21,11 +23,10 @@ lateinit var scaffoldState: ScaffoldState
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun VillTechApp() {
+fun VillTechApp(navController: NavHostController) {
     scaffoldState = rememberScaffoldState()
     val rootViewModel = getViewModel<RootViewModel>()
     rootViewModel.contentHeight = LocalConfiguration.current.screenHeightDp
-    val navController = rememberAnimatedNavController()
 
     Box(modifier = Modifier.fillMaxSize().background(color = Color.White)) {
         Scaffold(

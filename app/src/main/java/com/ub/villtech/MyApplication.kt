@@ -14,7 +14,8 @@ class MyApplication : Application() {
             modules(
                 listOf(
                     AppModule.appModule,
-                    AppModule.viewModelModule
+                    AppModule.viewModelModule,
+                    AppModule.databaseModule
                 )
             )
         }

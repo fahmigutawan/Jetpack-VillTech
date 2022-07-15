@@ -25,6 +25,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.ub.villtech.R
 import com.ub.villtech.navigation.NavigationRoute
+import com.ub.villtech.rootViewModel
 import com.ub.villtech.ui.theme.*
 import com.ub.villtech.viewmodel.BottomNavigationViewModel
 import com.ub.villtech.viewmodel.RootViewModel
@@ -33,7 +34,6 @@ import org.koin.androidx.compose.getViewModel
 @Composable
 fun BottomNavigationBar(navController: NavHostController) {
     val viewModel = getViewModel<BottomNavigationViewModel>()
-    val rootViewModel = getViewModel<RootViewModel>()
 
     if (rootViewModel.isBottomNavigationEnabled) {
         val listOfIconId = ArrayList<MutableState<Int>>()
@@ -104,7 +104,7 @@ fun BottomNavigationBar(navController: NavHostController) {
         BottomNavigation(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(all = 8.dp)
+                .padding(bottom = 16.dp, start = 8.dp, end = 8.dp)
                 .clip(RoundedCornerShape(CornerSize(14.dp))),
             backgroundColor = Light,
             elevation = 4.dp
