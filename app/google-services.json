@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "93439671784",
+    "firebase_url": "https://villtech-default-rtdb.firebaseio.com",
+    "project_id": "villtech",
+    "storage_bucket": "villtech.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:93439671784:android:e40f955bea175bd33c385d",
+        "android_client_info": {
+          "package_name": "com.ub.villtech"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "93439671784-cd7u38of94gm7b0kotc2f5j51ivikbrj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ub.villtech",
+            "certificate_hash": "086ce6f30d42faebc30d160d9cccf6cbaefc71ce"
+          }
+        },
+        {
+          "client_id": "93439671784-srh9ccq4ktc4hiv4mmmlujn57fqj8iur.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCuigfkTOpshBe30QdA5VmIS3ClDyb75k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "93439671784-srh9ccq4ktc4hiv4mmmlujn57fqj8iur.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
